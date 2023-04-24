@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Dropzone.js 샘플</title>
+    <!-- Dropzone.js 스타일 시트 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css"
+        integrity="sha512-WvVX1YO12zmsvTpUQV8s7ZU98DnkaAokcciMZJfnNWyNzm7//QRV61t4aEr0WdIa4pe854QHLTV302vH92FSMw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .images_file_add .dz-message.needsclick img {
+            width: 50px;
+            display: block;
+            margin: auto;
+            opacity: .6;
+            margin-bottom: 15px;
+        }
+
+        .images_file_add span.plus {
+            display: none;
+        }
+
+        .images_file_add .dropzone.dz-started .dz-message {
+            display: inline-block !important;
+            width: 120px;
+            float: right;
+            border: 1px solid rgba(238, 238, 238, 0.36);
+            border-radius: 30px;
+            height: 120px;
+            margin: 16px;
+            -webkit-transition: .2s;
+            transition: .2s;
+        }
+
+        .images_file_add .dropzone.dz-started .dz-message span.text {
+            display: none;
+        }
+
+        .images_file_add .dropzone.dz-started .dz-message span.plus {
+            display: block;
+            font-size: 70px;
+            color: #AAA;
+            line-height: 110px;
+        }
+
+        .images_file_add .dropzone {
+            border: 3px dotted #000;
+            border-radius: 15px;
+            padding: 0;
+        }
+
+        .images_file_add .dropzone .dz-message {
+            padding: 55px 0;
+        }
+
+        #dropzone-preview {
+            display: flex;
+        }
+
+        #dropzone-preview li {
+            list-style: none;
+        }
+
+        .dz-error.dz-complete {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dropzone.js 샘플</h1>
+    <!-- 파일 업로드 폼 -->
+    <div class="images_file_add">
+        <form action="/upload" class="dropzone" id="my-dropzone">
+            <div class="dz-message needsclick">
+                <span class="text">
+                    <img src="http://www.freeiconspng.com/uploads/------------------------------iconpngm--22.png"
+                        alt="Camera" />
+                    안녕하세요 야다입니다. <em>ㅇㅇㅇㅇㅇㅇ</em><br> 블라블라입니다.
+                </span>
+                <span class="plus">+</span>
+            </div>
+        </form>
+    </div>
+
+    <!-- 포스팅 - 이미지/동영상 dropzone 영역 -->
+    <ul class="list-unstyled" id="dropzone-preview">
+        <li class="mt-2" id="dropzone-preview-list">
+            <!-- This is used as the file preview template -->
+            <div class="">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <img data-dz-thumbnail="data-dz-thumbnail" class="w-full h-auto rounded-3 block" src="#"
+                                alt="Dropzone-Image" style="width: 120px;" />
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <h6 class="" data-dz-name="data-dz-name">&nbsp;</h6>
+                            <p class="" data-dz-size="data-dz-size"></p>
+                            <strong class="error text-danger" data-dz-errormessage="data-dz-errormessage"></strong>
+                        </div>
+                    </div>
+                    <!-- <div class="shrink-0 ms-3">
+                        <button data-dz-remove="data-dz-remove" class="btn btn-sm btn-danger">Delete</button>
+                    </div> -->
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+    <!-- 이미지 추가 버튼 -->
+    <div>
+        <button type="button" id="add-image-button">이미지 추가</button>
+    </div>
+
+
+    <!-- Dropzone.js 스크립트 추가 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"
+        integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // Dropzone.js 초기화
+        Dropzone.autoDiscover = false;
+
+
+        var dropzonePreviewNode = document.querySelector('#dropzone-preview-list');
+        dropzonePreviewNode.id = '';
+        var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
+        dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
+
+        // Dropzone.js 인스턴스 생성
+        var myDropzone = new Dropzone("#my-dropzone", {
+            url: "/upload",
+            method: "post",
+            paramName: "file",
+            autoProcessQueue: false,
+            maxFilesize: 5,
+            maxFiles: 5,
+            acceptedFiles: ".jpg,.jpeg,.png,.gif",
+            addRemoveLinks: true,
+            dictRemoveFile: "삭제",
+            dictDefaultMessage: "",
+            previewTemplate: previewTemplate,
+            previewsContainer: '#dropzone-preview',
+        });
+
+
+        // 이미지 추가 버튼 이벤트 처리
+        document.getElementById("add-image-button").addEventListener("click", function () {
+            myDropzone.hiddenFileInput.click();
+        });
+    </script>
+</body>
+
+</html>
