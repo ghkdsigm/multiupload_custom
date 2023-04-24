@@ -56,10 +56,19 @@
 
         #dropzone-preview {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
         #dropzone-preview li {
             list-style: none;
+            width: 19%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
 
         .dz-error.dz-complete {
@@ -102,9 +111,9 @@
                             <strong class="error text-danger" data-dz-errormessage="data-dz-errormessage"></strong>
                         </div>
                     </div>
-                    <!-- <div class="shrink-0 ms-3">
+                    <div class="shrink-0 ms-3">
                         <button data-dz-remove="data-dz-remove" class="btn btn-sm btn-danger">Delete</button>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </li>
@@ -112,9 +121,9 @@
 
 
     <!-- 이미지 추가 버튼 -->
-    <div>
+    <!-- <div>
         <button type="button" id="add-image-button">이미지 추가</button>
-    </div>
+    </div> -->
 
 
     <!-- Dropzone.js 스크립트 추가 -->
@@ -142,7 +151,7 @@
             maxFiles: 20,
             acceptedFiles: ".jpg,.jpeg,.png,.gif",
             addRemoveLinks: true,
-            dictRemoveFile: "삭제",
+            dictRemoveFile: "",
             dictDefaultMessage: "",
             previewTemplate: previewTemplate,
             previewsContainer: '#dropzone-preview',
@@ -150,9 +159,9 @@
 
 
         // 이미지 추가 버튼 이벤트 처리
-        document.getElementById("add-image-button").addEventListener("click", function () {
-            myDropzone.hiddenFileInput.click();
-        });
+        // document.getElementById("add-image-button").addEventListener("click", function () {
+        //     myDropzone.hiddenFileInput.click();
+        // });
     </script>
 </body>
 
